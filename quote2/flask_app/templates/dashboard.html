@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="main_container">
+        <div class="container w-75">
+            <nav class="navbar bg-secondary p-2 justify-content-between mb-4 bg-dark">
+                <h3 class="text-light ml-4">Welcome {{session['first_name']}}&nbsp;{{session['last_name']}} </h3>
+                <div class="d-flex">
+                    <a id="btn" class="btn rounded-pill btn-success" href="/new/quote" > Create New Quote </a>
+                    <a id="btn" class="btn rounded-pill btn-danger ml-4 mr-4" href="/logout"> Logout </a>
+                </div>
+            </nav>
+            <h1 class="header2" class="text-center">All Quotes</h1>
+            <table class="table table-dark table-hover">
+                <thead class="table-dark-hover">
+                    <tr>
+                        <th>Author</th>
+                        <th>Description</th>
+                        <th>Maker</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for quote in quotes: %}
+                            <tr>
+                                <td>{{ quote.author }} </td>
+                                <td>{{ quote.description }} </td>
+                                <td>{{ quote.maker.first_name }} </td>
+
+                                <td><a href="/view/quote/{{ quote.id }}">View Quotes</a>
+                                    {% if quote.user_id == session.user_id %}
+                                        <a href="/edit/quote/{{quote.id}}"> | Edit | </a>
+                                        <a href="/delete/quote/{{quote.id}}">Delete</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

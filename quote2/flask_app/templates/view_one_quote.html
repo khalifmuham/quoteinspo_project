@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotes</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="main_container">
+        <div class="container w-75">
+            <nav class="navbar bg-secondary p-2 justify-content-between mb-4 bg-dark">
+                <h3 class="text-light ml-4"> {{ session['first_name'] }} {{ session['last_name']}}'s Quotes </h3>
+                <div class="d-flex">
+                    <a class="btn rounded-pill btn-success ml-4 mr-4" href="/new/quote">Add Quotes</a>
+                    <a class="btn rounded-pill btn-success" href="/dashboard">View All Quotes</a>
+                    <a class="btn rounded-pill btn-danger ml-4 mr-4" href="/logout">Logout</a>
+                </div>
+            </nav> 
+            <h1 class="header2" class="text-center mb-3">Quote</h1>
+            <div class="card col-6 mx-auto border-dark p-4 ">
+                <h4><span class="text-primary">Author: </span>{{ quote.author }}</h4>
+                <p><span class="text-primary">Made by:</span> {{quote.maker.first_name}}</p>
+                <p><span class="text-primary">Description: </span>{{quote.description}}</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Quotes</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="main_container">
+        <div class="container w-75">
+            <nav class="navbar bg-secondary p-2 justify-content-between mb-4 bg-dark">
+                <h3 class="text-light ml-4">{{ session['first_name'] }} {{ session['last_name']}}'s Quotes</h3>
+                <div class="d-flex">
+                    <a class="btn rounded-pill btn-success" href="/dashboard">View All Quotes</a>
+                    <a class="btn rounded-pill btn-danger ml-4 mr-4" href="/logout">Logout</a>
+                </div>
+            </nav>
+            <h1 class="header2" class="text-center mb-3">Edit Quote</h1>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class='mb-3 text-danger text-center'><em>{{ message }} </em></p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form class="d-flex justify-content-center" action="/edit/quote/{{quote.id}}" method="post">
+                <div class="mb-3 mr-5">
+                    <label for="author" class="form-label">Author:</label>
+                    <input type="text" class="form-control mb-3" name="author" value = "{{ quote.author }}" >
+                    <label for="description" class="form-label">Description:</label>
+                    <textarea name="description" class="form-control" cols="30" rows="5" value = "{{ quote.description }}"> {{ quote.description }} </textarea>
+                    <label for="created_at" class="form-label">Date Created: 
+                    </label>
+                    <input type="date" name="created_at" id="created_at" value = "{{ quote.created_at }}" >
+                </div>
+                <div class="mb-3 ml-5">
+                    <input type='submit' value='Submit' class="btn btn-warning rounded-pill mt-4" >
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
